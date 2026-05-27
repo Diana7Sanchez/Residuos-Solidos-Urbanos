@@ -4,291 +4,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SICT | Plataforma Nacional RSU</title>
+    <title>SICT | RSU</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
-        :root {
-            --bg-color: #f4f4f4;
-            --panel-bg: #ffffff;
-            --primary-color: #611232;
-            --secondary-color: #A57F2C;
-            --accent-green: #2E7D32;
-            --accent-red: #C62828;
-            --accent-blue: #1565C0;
-            --text-dark: #222222;
-        }
+ <style>
+    :root {
+        --bg-color: #f4f4f4;
+        --panel-bg: #ffffff;
+        --primary-color: #611232;
+        --secondary-color: #A57F2C;
+        --accent-green: #2E7D32;
+        --accent-red: #C62828;
+        --accent-blue: #1565C0;
+        --text-dark: #222222;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg-color);
-            color: var(--text-dark);
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--bg-color);
+        color: var(--text-dark);
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        min-height: 100vh;
+        background: white;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================== */
+
+    .sidebar {
+        background: white;
+        padding: 20px;
+        border-right: 1px solid #ddd;
+        overflow-y: auto;
+    }
+
+   .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px 0 22px 0;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+    .sict-mini {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: var(--primary-color);
+        margin-bottom: 5px;
+    }
+
+    .sict-subtitle {
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .section-title {
+        margin-top: 18px;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #eee;
+        color: var(--primary-color);
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 11.5px;
+        margin-bottom: 4px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .row-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    input {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 13px;
+        transition: 0.2s;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(97,18,50,0.1);
+    }
+
+    /* =========================
+       MAIN CONTENT
+    ========================== */
+
+    .main-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-x: hidden;
+    }
+
+    /* =========================
+       TOPBAR
+    ========================== */
+
+    .topbar {
+        background: linear-gradient(135deg, #611232 0%, #7A1E3A 100%);
+        border-radius: 18px;
+        padding: 24px 28px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        color: white;
+        overflow: hidden;
+    }
+
+    .topbar-content {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .topbar-logo {
+        width: 120px;
+        min-width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .topbar-logo img {
+        width: 100%;
+        max-width: 110px;
+        object-fit: contain;
+    }
+
+    .header-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        min-width: 280px;
+    }
+
+    .subsecretaria-main {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+}
+
+    .direccion-main {
+    font-size: 15px;
+    margin-top: 8px;
+    opacity: 0.92;
+    font-weight: 500;
+}
+
+    .platform-main {
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFD54F;
+    letter-spacing: 0.2px;
+}
+    .municipio-box {
+        margin-top: 16px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        background: rgba(255,255,255,0.12);
+        padding: 12px 16px;
+        border-radius: 12px;
+        width: fit-content;
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .municipio-box b {
+        color: #FFE082;
+    }
+
+    /* =========================
+       KPI CARDS
+    ========================== */
+
+   .kpi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    align-items: stretch;
+}
+
+  .kpi-card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    border-left: 6px solid var(--primary-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 130px;
+
+    transition: all 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+}
+
+    .green {
+        border-left-color: var(--accent-green);
+    }
+
+    .red {
+        border-left-color: var(--accent-red);
+    }
+
+    .blue {
+        border-left-color: var(--accent-blue);
+    }
+
+    .gold {
+        border-left-color: var(--secondary-color);
+    }
+
+    .kpi-value {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+
+    /* =========================
+       DASHBOARD GRID
+    ========================== */
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1.4fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .card {
+        background: white;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        color: var(--primary-color);
+        font-size: 16px;
+    }
+
+    /* =========================
+       CHART
+    ========================== */
+
+    .chart-container {
+        position: relative;
+        height: 450px;
+        width: 100%;
+    }
+
+    /* =========================
+       TABLE
+    ========================== */
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        max-height: 450px;
+        border-radius: 10px;
+    }
+
+    table {
+        width: 100%;
+        min-width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 9px 10px;
+        text-align: right;
+        border-bottom: 1px solid #eee;
+        white-space: nowrap;
+    }
+
+    th {
+        background: #f8f8f8;
+        color: var(--primary-color);
+        position: sticky;
+        top: 0;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    th:first-child,
+    td:first-child {
+        text-align: center;
+    }
+
+    tbody tr:hover {
+        background: #fafafa;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width: 1200px) {
+
+        .dashboard-grid {
+            grid-template-columns: 1fr;
         }
+    }
+.sidebar-logo {
+    width: 100%;
+    max-width: 210px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+    @media(max-width: 900px) {
 
         .container {
-            display: grid;
-            grid-template-columns: 360px 1fr;
-            min-height: 100vh;
-            background: white; /* Asegura continuidad visual en el fondo de la barra lateral */
+            grid-template-columns: 1fr;
         }
 
-        /* BARRA LATERAL (SIDEBAR OPTIMIZADA) */
         .sidebar {
-            background: white;
-            padding: 20px;
-            border-right: 1px solid #ddd;
+            border-right: none;
+            border-bottom: 1px solid #ddd;
         }
 
-        .logo-container {
-            display: flex;
+        .topbar-content {
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .sict-mini {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .sict-subtitle {
-            font-size: 11px;
-            color: #666;
             text-align: center;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            margin-top: 15px;
-            margin-bottom: 10px;
-            padding-bottom: 4px;
-            border-bottom: 2px solid #eee;
-            color: var(--primary-color);
-            font-size: 13px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group {
-            margin-bottom: 8px; /* Compactación de espacio vertical */
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 11.5px;
-            margin-bottom: 3px;
-            font-weight: 600;
-            color: #444;
-        }
-
-        .row-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 6px 10px; /* Padding más ejecutivo */
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 13px;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        /* CONTENIDO PRINCIPAL */
-        .main-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            overflow-x: hidden;
-        }
-
-        .topbar {
-            background: linear-gradient(135deg, #611232 0%, #7A1E3A 100%);
-            border-radius: 16px;
-            padding: 24px 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            color: white;
         }
 
         .header-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .secretaria-main {
-            font-size: 26px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .subsecretaria-main {
-            font-size: 15px;
-            color: #F8E7B5;
-            font-weight: 600;
-            margin-top: 4px;
-        }
-
-        .direccion-main {
-            font-size: 13px;
-            opacity: 0.92;
-            margin-top: 2px;
-        }
-
-        .platform-main {
-            margin-top: 14px;
-            font-size: 20px;
-            font-weight: 700;
-            color: #FFD54F;
+            align-items: center;
         }
 
         .municipio-box {
-            margin-top: 14px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            background: rgba(255,255,255,0.12);
-            padding: 10px 16px;
-            border-radius: 10px;
-            width: fit-content;
-            font-size: 13px;
-        }
-
-        .municipio-box b {
-            color: #FFE082;
-        }
-
-        /* TARJETAS DE RESULTADOS (KPIs) */
-        .kpi-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); /* Ajuste automático para 5 tarjetas */
-            gap: 15px;
-        }
-
-        .kpi-card {
-            background: white;
-            padding: 20px;
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-left: 6px solid var(--primary-color);
-            display: flex;
-            flex-direction: column;
             justify-content: center;
         }
 
-        .green { border-left-color: var(--accent-green); }
-        .red { border-left-color: var(--accent-red); }
-        .blue { border-left-color: var(--accent-blue); }
-        .gold { border-left-color: var(--secondary-color); }
+        .kpi-container {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+    }
 
-        .kpi-title {
-            font-size: 11px;
-            color: #777;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 0.5px;
+    @media(max-width: 600px) {
+
+        .main-content {
+            padding: 14px;
         }
 
-        .kpi-value {
-            margin-top: 6px;
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        /* GRID DEL DASHBOARD */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1.6fr 1.4fr;
-            gap: 20px;
-            align-items: stretch;
-        }
-
-        .card {
-            background: white;
-            border-radius: 14px;
+        .topbar {
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .card h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-size: 16px;
-            margin-bottom: 15px;
+        .subsecretaria-main {
+            font-size: 19px;
+        }
+
+        .platform-main {
+            font-size: 18px;
+        }
+
+        .municipio-box {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .kpi-container {
+            grid-template-columns: 1fr;
         }
 
         .chart-container {
-            position: relative;
-            height: 450px;
+            height: 320px;
         }
 
-        .table-responsive {
-            max-height: 450px;
-            overflow-y: auto;
+        .card {
+            padding: 16px;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        th, td {
-            padding: 8px 10px;
-            text-align: right;
-            border-bottom: 1px solid #eee;
-        }
-
-        th {
-            background: #f8f8f8;
-            color: var(--primary-color);
-            position: sticky;
-            top: 0;
-            font-weight: bold;
-        }
-
-        th:first-child, td:first-child {
-            text-align: center;
-        }
-
-        @media(max-width:1200px){
-            .dashboard-grid { grid-template-columns: 1fr; }
-        }
-        @media(max-width:900px){
-            .container { grid-template-columns: 1fr; }
-            .sidebar { border-right: none; border-bottom: 1px solid #ddd; }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
 
 <div class="container">
     <div class="sidebar">
-        <div class="logo-container">
-            <div class="sict-mini">SICT</div>
-            <div class="sict-subtitle">Secretaría de Infraestructura, Comunicaciones y Transportes</div>
-        </div>
+       <div class="logo-container">
+    <img src="logo_sict.png" class="sidebar-logo" alt="SICT">
+
+</div>
 
         <div class="section-title">1. Datos del Municipio</div>
         <div class="form-group">
@@ -362,6 +517,10 @@
             <input type="number" id="g_energia" value="6791496">
         </div>
 
+        <div class="form-group">
+    <label>Urbanización Año 0 ($)</label>
+    <input type="number" id="g_urbanizacion" value="50000000">
+</div>
         <div class="section-title">4. Variables Exógenas</div>
         <div class="form-group">
             <label>Inflación Anual (%)</label>
@@ -378,17 +537,28 @@
     </div>
 
     <div class="main-content">
-        <div class="topbar">
-            <div class="header-wrapper">
-                <div class="subsecretaria-main">Secretaría de Infraestructura, Comunicaciones y Transportes</div>
-                <div class="direccion-main">Construcciones Sustentables</div>
-                <div class="platform-main">Residuos Sólidos Urbanos (RSU)</div>
-                <div class="municipio-box">
-                    <span>Estado: <b id="estado_header">Puebla</b></span>
-                    <span>Municipio: <b id="municipio_header">Puebla Centro</b></span>
-                </div>
-            </div>
+       <div class="topbar">
+    <div class="header-wrapper">
+
+        <div class="subsecretaria-main">
+            Secretaría de Infraestructura, Comunicaciones y Transportes
         </div>
+
+        <div class="direccion-main">
+            Construcciones Sustentables
+        </div>
+
+        <div class="platform-main">
+            Residuos Sólidos Urbanos (RSU)
+        </div>
+
+        <div class="municipio-box">
+            <span>Estado: <b id="estado_header">Puebla</b></span>
+            <span>Municipio: <b id="municipio_header">Puebla Centro</b></span>
+        </div>
+
+    </div>
+</div>
 
         <div class="kpi-container">
             <div class="kpi-card green">
@@ -491,14 +661,16 @@ function calcular(){
         document.getElementById('kpi_gastos').innerText = formatCurrency(gastosTotalesAño1);
 
         // 4. Proyección de Flujos Netos y Estructuras de Datos
-        let flujosEfectivos = [-inversion]; // Año 0 representa el desembolso inicial
+        const urbanizacion = parseFloat(document.getElementById('g_urbanizacion').value) || 0;
+
+        let flujosEfectivos = [-(inversion + urbanizacion)]; 
         
         let labels = [];
         let ingresosAcumData = [];
         let gastosAcumData = [];
         
         let ingresosAcumulados = 0;
-        let gastosAcumulados = inversion;
+        let gastosAcumulados = inversion + urbanizacion;
         
         const tbody = document.querySelector('#tabla_flujos tbody');
         tbody.innerHTML = '';
@@ -510,7 +682,7 @@ function calcular(){
 
             if(i === 0){
                 ingresosAcumData.push(0);
-                gastosAcumData.push(inversion);
+                gastosAcumData.push(inversion + urbanizacion);
             } else {
                 // Incorporación de la tasa de inflación compuesta acumulada
                 const factorInflacion = Math.pow(1 + inflacion, i - 1);
@@ -567,25 +739,29 @@ function calcular(){
         if (tir !== null && !isNaN(tir)) {
             document.getElementById('kpi_tir').innerText = (tir * 100).toFixed(2) + '%';
             const tirCard = document.getElementById('kpi_tir').parentElement;
+
             // Verde si la rentabilidad interna supera la tasa de descuento mínima aceptable
             tirCard.style.borderLeftColor = (tir >= tasaDescuento) ? 'var(--accent-green)' : 'var(--accent-red)';
         } else {
             document.getElementById('kpi_tir').innerText = "N/A";
         }
 
-        // Despliegue final de años de recuperación
+
         document.getElementById('kpi_retorno').innerText = añoRecuperacion !== -1 ? añoRecuperacion.toFixed(2) + ' Años' : 'No recuperable';
 
-        // 7. Renderización de la Curva de Trayectorias en Chart.js
+   
         const ctx = document.getElementById('retornoChart').getContext('2d');
+
         if(chartInstance){
             chartInstance.destroy();
         }
 
         chartInstance = new Chart(ctx, {
             type: 'line',
+
             data: {
                 labels: labels,
+
                 datasets: [
                     {
                         label: 'Ingresos Acumulados',
@@ -594,27 +770,101 @@ function calcular(){
                         backgroundColor: 'rgba(46, 125, 50, 0.05)',
                         borderWidth: 3,
                         fill: true,
-                        tension: 0.1
+                        tension: 0.2,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
                     },
+
                     {
                         label: 'Gastos Acumulados (Inversión + Egresos)',
                         data: gastosAcumData,
                         borderColor: '#C62828',
-                        borderDash: [5, 5],
+                        borderDash: [6, 6],
                         borderWidth: 3,
-                        tension: 0.1
+                        tension: 0.2,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
                     }
                 ]
             },
+
             options: {
+
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'top' } },
+
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+
+                plugins: {
+
+                    legend: {
+                        position: 'bottom',
+
+                        labels: {
+                            padding: 20,
+                            boxWidth: 14,
+                            usePointStyle: true,
+
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        }
+                    },
+
+                    tooltip: {
+                        backgroundColor: '#222',
+                        padding: 12,
+
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + formatCurrency(context.raw);
+                            }
+                        }
+                    }
+                },
+
                 scales: {
-                    y: { ticks: { callback: function(value) { return formatCurrency(value); } } }
+
+                    x: {
+                        grid: {
+                            display: false
+                        },
+
+                        ticks: {
+                            maxRotation: 0,
+                            autoSkip: true,
+
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: 'rgba(0,0,0,0.06)'
+                        },
+
+                        ticks: {
+
+                            callback: function(value) {
+                                return formatCurrency(value);
+                            },
+
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
                 }
             }
         });
+
     } catch (error) {
         console.error("Error en la ejecución de la función de cálculo financiero: ", error);
     }
@@ -622,16 +872,21 @@ function calcular(){
 
 // Algoritmo numérico para aproximación de raíces (TIR financiera)
 function calcularTIR(flujos, estimacion = 0.1) {
+
     const maxIteraciones = 1000;
     const precision = 1e-7;
+
     let r = estimacion;
 
     for (let i = 0; i < maxIteraciones; i++) {
+
         let vpn = 0;
         let derivadaVpn = 0;
 
         for (let t = 0; t < flujos.length; t++) {
+
             vpn += flujos[t] / Math.pow(1 + r, t);
+
             if (t > 0) {
                 derivadaVpn -= t * flujos[t] / Math.pow(1 + r, t + 1);
             }
@@ -644,12 +899,14 @@ function calcularTIR(flujos, estimacion = 0.1) {
         if (Math.abs(nuevoR - r) < precision) {
             return nuevoR;
         }
+
         r = nuevoR;
     }
+
     return (r > -1 && r < 5) ? r : null;
 }
 
-// Configuración de listeners dinámicos para recalcular al vuelo sin recargar
+// Recalcular automáticamente
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', calcular);
     input.addEventListener('change', calcular);
