@@ -53,18 +53,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 0 14px 0; /* Relleno optimizado */
-            margin-bottom: 15px;
+            padding: 20px 0 22px 0;
+            margin-bottom: 20px;
             border-bottom: 1px solid #e5e5e5;
         }
 
         .sidebar-logo {
             width: 100%;
-            max-width: 160px; /* Reducido para que no se vea gigante */
+            max-width: 210px;
             height: auto;
             object-fit: contain;
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 12px auto;
         }
 
         .section-title {
@@ -279,13 +279,13 @@
             overflow-y: auto;
             max-height: 450px;
             border-radius: 10px;
-            border: 1px solid #eee;
+            border: 1px solid #eee; /* Evita que los bordes colapsen en scroll */
         }
 
         table {
             width: 100%;
             min-width: 100%;
-            border-collapse: separate;
+            border-collapse: separate; /* Cambiado a separate para soportar sticky headers sin bugs visuales */
             border-spacing: 0;
             font-size: 12px;
         }
@@ -298,13 +298,13 @@
         }
 
         th {
-            background-color: #f8f8f8 !important;
+            background-color: #f8f8f8 !important; /* Forzado de fondo sólido */
             color: var(--primary-color);
             position: sticky;
             top: 0;
             font-weight: bold;
-            z-index: 10;
-            box-shadow: inset 0 -1px 0 #eee;
+            z-index: 10; /* Z-index elevado para que los datos pasen siempre detrás */
+            box-shadow: inset 0 -1px 0 #eee; /* Simula el borde inferior que se pierde con sticky */
         }
 
         th:first-child,
@@ -379,7 +379,7 @@
 <div class="container">
     <div class="sidebar">
         <div class="logo-container">
-            <img src="logo_sict.png" alt="Logo SICT" class="sidebar-logo">
+            <img src="logo_sict.png" alt="Logo SICT">
         </div>
 
         <div class="section-title">1. Datos del Municipio</div>
@@ -548,6 +548,7 @@ let chartInstance = null;
 function cleanNumericValue(id) {
     const el = document.getElementById(id);
     if (!el) return 0;
+    // Eliminamos comas antes de parsear para no romper cálculos financieros
     return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
@@ -561,6 +562,7 @@ function formatCurrency(value){
 
 function calcular(){
     try {
+        // 1. Lectura de Datos Generales
         const estado = document.getElementById('estado').value;
         const municipio = document.getElementById('municipio').value;
         document.getElementById('estado_header').innerText = estado;
@@ -569,6 +571,7 @@ function calcular(){
         const inversion = cleanNumericValue('inversion');
         const dias = cleanNumericValue('dias_operacion') || 360;
 
+        // 2. Cálculo de Ingresos Base Año 1
         const ingRecepcion = cleanNumericValue('ton_recepcion') * cleanNumericValue('p_recepcion') * dias;
         const ingCombustible = cleanNumericValue('ton_combustible') * cleanNumericValue('p_combustible') * dias;
         const ingFlexible = cleanNumericValue('ton_p_flexible') * cleanNumericValue('p_p_flexible') * dias;
@@ -577,21 +580,26 @@ function calcular(){
         
         const ingresosBaseAño1 = ingRecepcion + ingCombustible + ingFlexible + ingDificil + ingInorganico;
 
+        // 3. Cálculo de Egresos Base Año 1
         const egrOrganicos = cleanNumericValue('ton_organicos') * cleanNumericValue('p_organicos') * dias;
         const manoObra = cleanNumericValue('g_mano_obra');
         const energia = cleanNumericValue('g_energia');
         const egresosOperativosAño1 = egrOrganicos + manoObra + energia;
 
+        // Variables Macroeconómicas
         const inflacion = cleanNumericValue('v_inflacion') / 100;
         const tasaDescuento = cleanNumericValue('v_descuento') / 100;
         const pctCompensacion = cleanNumericValue('p_compensacion') / 100;
 
+        // Compensación a Municipios
         const compensacionAño1 = ingresosBaseAño1 * pctCompensacion;
         const gastosTotalesAño1 = egresosOperativosAño1 + compensacionAño1;
 
-        document.getElementById('kpi_ingresos').innerText = formatCurrency( ingresosBaseAño1);
+        // Despliegue de KPIs de Operación Base
+        document.getElementById('kpi_ingresos').innerText = formatCurrency(ingresosBaseAño1);
         document.getElementById('kpi_gastos').innerText = formatCurrency(gastosTotalesAño1);
 
+        // 4. Proyección de Flujos Netos y Estructuras de Datos
         const urbanizacion = cleanNumericValue('g_urbanizacion');
 
         let flujosEfectivos = [-(inversion + urbanizacion)]; 
@@ -647,6 +655,7 @@ function calcular(){
             tbody.appendChild(row);
         }
 
+        // 5. EVALUACIÓN DE MATRIZ FINANCIERA: CÁLCULO DEL VPN
         let vpn = -(inversion + urbanizacion);
         for(let t = 1; t <= 20; t++){
             vpn += flujosEfectivos[t] / Math.pow(1 + tasaDescuento, t);
@@ -660,6 +669,7 @@ function calcular(){
             vpnCard.style.borderLeftColor = 'var(--accent-red)';
         }
 
+        // 6. CÁLCULO ITERATIVO DE LA TASA INTERNA DE RETORNO
         let tir = calcularTIR(flujosEfectivos);
         if (tir !== null && !isNaN(tir)) {
             document.getElementById('kpi_tir').innerText = (tir * 100).toFixed(2) + '%';
@@ -789,11 +799,13 @@ function calcularTIR(flujos, estimacion = 0.1) {
     return (r > -1 && r < 5) ? r : null;
 }
 
+// Escucha de cambios automática
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', calcular);
     input.addEventListener('change', calcular);
 });
 
+// Formateador visual sin romper tipos numéricos nativos
 function formatearInputMiles(input) {
     input.addEventListener('input', function(e) {
         let valor = this.value.replace(/,/g, '');
@@ -805,6 +817,7 @@ function formatearInputMiles(input) {
     });
 }
 
+// Aplicar formato exclusivo a campos de texto que actúan como decimales dinámicos
 document.querySelectorAll('input[inputmode="decimal"]').forEach(input => {
     if(input.value !== '') {
         let valor = input.value.replace(/,/g, '');
