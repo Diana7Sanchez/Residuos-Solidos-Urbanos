@@ -316,61 +316,68 @@
             background: #fafafa;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================== */
+       /* =========================
+   RESPONSIVE OPTIMIZADO
+========================== */
 
-        @media(max-width: 1200px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+@media(max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
-        @media(max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
+@media(max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
 
-            .sidebar {
-                border-right: none;
-                border-bottom: 1px solid #ddd;
-            }
+    /* Forzamos a que la barra lateral pase al final */
+    .sidebar {
+        border-right: none;
+        border-top: 1px solid #ddd;
+        order: 2; /* Pasa a segundo lugar */
+    }
 
-            .topbar-content {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
+    /* Forzamos a que el contenido principal suba al inicio */
+    .main-content {
+        order: 1; /* Pasa a primer lugar */
+    }
 
-            .header-wrapper {
-                align-items: center;
-            }
+    .topbar-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
-            .subsecretaria-main,
-            .direccion-main,
-            .platform-main {
-                width: 100%;
-                text-align: center;
-            }
+    .header-wrapper {
+        align-items: center;
+    }
 
-            .municipio-box {
-                justify-content: center;
-            }
+    .subsecretaria-main,
+    .direccion-main,
+    .platform-main {
+        width: 100%;
+        text-align: center;
+    }
 
-            .kpi-container {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            }
-        }
+    .municipio-box {
+        justify-content: center;
+    }
 
-        @media(max-width: 600px) {
-            .main-content { padding: 14px; }
-            .topbar { padding: 20px; }
-            .subsecretaria-main { font-size: 19px; }
-            .platform-main { font-size: 18px; }
-            .kpi-container { grid-template-columns: 1fr; }
-            .chart-container { height: 320px; }
-            .card { padding: 16px; }
-        }
+    .kpi-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media(max-width: 600px) {
+    .main-content { padding: 14px; }
+    .topbar { padding: 20px; }
+    .subsecretaria-main { font-size: 17px; } /* Ajuste ligero para pantallas muy chicas */
+    .platform-main { font-size: 16px; }
+    .kpi-container { grid-template-columns: 1fr; }
+    .chart-container { height: 320px; }
+    .card { padding: 16px; }
+}
     </style>
 </head>
 
