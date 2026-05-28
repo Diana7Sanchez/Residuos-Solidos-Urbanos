@@ -416,171 +416,321 @@
 <body>
 
 <div class="container">
+
+    <!-- SIDEBAR -->
     <div class="sidebar">
+
+        <!-- LOGO -->
         <div class="logo-container">
-            <img src="logo_sict.png" alt="Logo SICT">
+
+            <img
+                src="logo_sict.png"
+                alt="Logo SICT"
+                class="sidebar-logo"
+            >
+
         </div>
 
-        <div class="section-title">1. Datos del Municipio</div>
-        <div class="form-group">
-            <label>Estado</label>
-            <input type="text" id="estado" value="Puebla">
-        </div>
-        <div class="form-group">
-            <label>Municipio</label>
-            <input type="text" id="municipio" value="Puebla Centro">
-        </div>
-        <div class="form-group">
-            <label>Inversión Inicial ($)</label>
-            <input type="text" inputmode="decimal" id="inversion" value="600000000">
-        </div>
-        <div class="form-group">
-            <label>Días Operación / Año</label>
-            <input type="number" id="dias_operacion" value="360">
+        <!-- INPUTS -->
+        <div class="sidebar-inputs">
+
+            <div class="section-title">
+                1. Datos del Municipio
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <input type="text" id="estado" value="Puebla">
+            </div>
+
+            <div class="form-group">
+                <label>Municipio</label>
+                <input type="text" id="municipio" value="Puebla Centro">
+            </div>
+
+            <div class="form-group">
+                <label>Inversión Inicial ($)</label>
+                <input type="text" inputmode="decimal" id="inversion" value="600000000">
+            </div>
+
+            <div class="form-group">
+                <label>Días Operación / Año</label>
+                <input type="number" id="dias_operacion" value="360">
+            </div>
+
+            <div class="section-title">
+                2. Matriz de Ingresos
+            </div>
+
+            <div class="form-group">
+                <label>Ingreso por Recepción</label>
+
+                <div class="row-inputs">
+
+                    <input type="text" inputmode="decimal" id="ton_recepcion" value="754.4" placeholder="Ton">
+
+                    <input type="text" inputmode="decimal" id="p_recepcion" value="200" placeholder="$">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Combustible Derivado</label>
+
+                <div class="row-inputs">
+
+                    <input type="text" inputmode="decimal" id="ton_combustible" value="225" placeholder="Ton">
+
+                    <input type="text" inputmode="decimal" id="p_combustible" value="240.32" placeholder="$">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Plástico Flexible</label>
+
+                <div class="row-inputs">
+
+                    <input type="text" inputmode="decimal" id="ton_p_flexible" value="6" placeholder="Ton">
+
+                    <input type="text" inputmode="decimal" id="p_p_flexible" value="1210.23" placeholder="$">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Plástico Difícil</label>
+
+                <div class="row-inputs">
+
+                    <input type="text" inputmode="decimal" id="ton_p_dificil" value="6" placeholder="Ton">
+
+                    <input type="text" inputmode="decimal" id="p_p_dificil" value="1920.8" placeholder="$">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Inorgánico no Valorizable</label>
+
+                <div class="row-inputs">
+
+                    <input type="text" inputmode="decimal" id="ton_inorganico" value="215.7" placeholder="Ton">
+
+                    <input type="text" inputmode="decimal" id="p_inorganico" value="358.57" placeholder="$">
+
+                </div>
+            </div>
+
+            <div class="section-title">
+                3. Matriz de Egresos
+            </div>
+
+            <div class="form-group">
+                <label>Orgánicos (Ton / Precio)</label>
+
+                <div class="row-inputs">
+
+                    <input type="text" inputmode="decimal" id="ton_organicos" value="301.7" placeholder="Ton">
+
+                    <input type="text" inputmode="decimal" id="p_organicos" value="240.14" placeholder="$">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Mano de Obra Anual ($)</label>
+
+                <input type="text" inputmode="decimal" id="g_mano_obra" value="28015836">
+            </div>
+
+            <div class="form-group">
+                <label>Energía Eléctrica Anual ($)</label>
+
+                <input type="text" inputmode="decimal" id="g_energia" value="6791496">
+            </div>
+
+            <div class="form-group">
+                <label>Urbanización Año 0 ($)</label>
+
+                <input type="text" inputmode="decimal" id="g_urbanizacion" value="50000000">
+            </div>
+
+            <div class="section-title">
+                4. Variables Exógenas
+            </div>
+
+            <div class="form-group">
+                <label>Inflación Anual (%)</label>
+
+                <input type="number" id="v_inflacion" value="4.5" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label>Tasa de Descuento (%)</label>
+
+                <input type="number" id="v_descuento" value="10.0" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label>Retorno a Municipios (%)</label>
+
+                <input type="number" id="p_compensacion" value="0.5" step="0.1">
+            </div>
+
         </div>
 
-        <div class="section-title">2. Matriz de Ingresos (Ton / Precios)</div>
-        <div class="form-group">
-            <label>Ingreso por Recepción</label>
-            <div class="row-inputs">
-                <input type="text" inputmode="decimal" id="ton_recepcion" value="754.4" placeholder="Ton">
-                <input type="text" inputmode="decimal" id="p_recepcion" value="200" placeholder="$">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Combustible Derivado</label>
-            <div class="row-inputs">
-                <input type="text" inputmode="decimal" id="ton_combustible" value="225" placeholder="Ton">
-                <input type="text" inputmode="decimal" id="p_combustible" value="240.32" placeholder="$">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Plástico Flexible</label>
-            <div class="row-inputs">
-                <input type="text" inputmode="decimal" id="ton_p_flexible" value="6" placeholder="Ton">
-                <input type="text" inputmode="decimal" id="p_p_flexible" value="1210.23" placeholder="$">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Plástico Difícil</label>
-            <div class="row-inputs">
-                <input type="text" inputmode="decimal" id="ton_p_dificil" value="6" placeholder="Ton">
-                <input type="text" inputmode="decimal" id="p_p_dificil" value="1920.8" placeholder="$">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Inorgánico no Valorizable</label>
-            <div class="row-inputs">
-                <input type="text" inputmode="decimal" id="ton_inorganico" value="215.7" placeholder="Ton">
-                <input type="text" inputmode="decimal" id="p_inorganico" value="358.57" placeholder="$">
-            </div>
-        </div>
-
-        <div class="section-title">3. Matriz de Egresos</div>
-        <div class="form-group">
-            <label>Orgánicos (Ton / Precio)</label>
-            <div class="row-inputs">
-                <input type="text" inputmode="decimal" id="ton_organicos" value="301.7" placeholder="Ton">
-                <input type="text" inputmode="decimal" id="p_organicos" value="240.14" placeholder="$">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Mano de Obra Anual ($)</label>
-            <input type="text" inputmode="decimal" id="g_mano_obra" value="28015836">
-        </div>
-        <div class="form-group">
-            <label>Energía Eléctrica Anual ($)</label>
-            <input type="text" inputmode="decimal" id="g_energia" value="6791496">
-        </div>
-        <div class="form-group">
-            <label>Urbanización Año 0 ($)</label>
-            <input type="text" inputmode="decimal" id="g_urbanizacion" value="50000000">
-        </div>
-
-        <div class="section-title">4. Variables Exógenas</div>
-        <div class="form-group">
-            <label>Inflación Anual (%)</label>
-            <input type="number" id="v_inflacion" value="4.5" step="0.1">
-        </div>
-        <div class="form-group">
-            <label>Tasa de Descuento (%)</label>
-            <input type="number" id="v_descuento" value="10.0" step="0.1">
-        </div>
-        <div class="form-group">
-            <label>Retorno a Municipios (%)</label>
-            <input type="number" id="p_compensacion" value="0.5" step="0.1">
-        </div>
     </div>
 
+    <!-- MAIN -->
     <div class="main-content">
+
+        <!-- HEADER -->
         <div class="topbar">
+
             <div class="header-wrapper">
+
                 <div class="subsecretaria-main">
                     Secretaría de Infraestructura, Comunicaciones y Transportes
                 </div>
+
                 <div class="direccion-main">
                     Construcciones Sustentables
                 </div>
+
                 <div class="platform-main">
                     Residuos Sólidos Urbanos (RSU)
                 </div>
+
                 <div class="municipio-box">
-                    <span>Estado: <b id="estado_header">Puebla</b></span>
-                    <span>Municipio: <b id="municipio_header">Puebla Centro</b></span>
+
+                    <span>
+                        Estado:
+                        <b id="estado_header">
+                            Puebla
+                        </b>
+                    </span>
+
+                    <span>
+                        Municipio:
+                        <b id="municipio_header">
+                            Puebla Centro
+                        </b>
+                    </span>
+
                 </div>
+
             </div>
+
         </div>
 
+        <!-- KPIs -->
         <div class="kpi-container">
-            <div class="kpi-card green">
-                <div class="kpi-title">Ingresos Año 1</div>
-                <div class="kpi-value" id="kpi_ingresos">$0</div>
-            </div>
-            <div class="kpi-card red">
-                <div class="kpi-title">Gastos Año 1 (C/Comp)</div>
-                <div class="kpi-value" id="kpi_gastos">$0</div>
-            </div>
-            <div class="kpi-card blue">
-                <div class="kpi-title">Valor Presente Neto (VPN)</div>
-                <div class="kpi-value" id="kpi_vpn">$0</div>
-            </div>
-            <div class="kpi-card gold">
-                <div class="kpi-title">Tasa Interna de Retorno (TIR)</div>
-                <div class="kpi-value" id="kpi_tir">0.00%</div>
-            </div>
-            <div class="kpi-card" style="border-left-color: #757575;">
-                <div class="kpi-title">Retorno de Inversión</div>
-                <div class="kpi-value" id="kpi_retorno">0.00 Años</div>
-            </div>
-        </div>
 
-        <div class="dashboard-grid">
-            <div class="card">
-                <h2>Trayectoria de Retorno de Inversión</h2>
-                <div class="chart-container">
-                    <canvas id="retornoChart"></canvas>
+            <div class="kpi-card green">
+                <div class="kpi-title">
+                    Ingresos Año 1
+                </div>
+
+                <div class="kpi-value" id="kpi_ingresos">
+                    $0
                 </div>
             </div>
 
+            <div class="kpi-card red">
+                <div class="kpi-title">
+                    Gastos Año 1 (C/Comp)
+                </div>
+
+                <div class="kpi-value" id="kpi_gastos">
+                    $0
+                </div>
+            </div>
+
+            <div class="kpi-card blue">
+                <div class="kpi-title">
+                    Valor Presente Neto (VPN)
+                </div>
+
+                <div class="kpi-value" id="kpi_vpn">
+                    $0
+                </div>
+            </div>
+
+            <div class="kpi-card gold">
+                <div class="kpi-title">
+                    Tasa Interna de Retorno (TIR)
+                </div>
+
+                <div class="kpi-value" id="kpi_tir">
+                    0.00%
+                </div>
+            </div>
+
+            <div class="kpi-card" style="border-left-color:#757575;">
+
+                <div class="kpi-title">
+                    Retorno de Inversión
+                </div>
+
+                <div class="kpi-value" id="kpi_retorno">
+                    0.00 Años
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="dashboard-grid">
+
             <div class="card">
-                <h2>Tabla Acumulada</h2>
+
+                <h2>
+                    Trayectoria de Retorno de Inversión
+                </h2>
+
+                <div class="chart-container">
+
+                    <canvas id="retornoChart"></canvas>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h2>
+                    Tabla Acumulada
+                </h2>
+
                 <div class="table-responsive">
+
                     <table id="tabla_flujos">
+
                         <thead>
+
                             <tr>
                                 <th>Año</th>
                                 <th>Ingresos Acum.</th>
                                 <th>Gastos Acum.</th>
                             </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
+                        </thead>
+
+                        <tbody></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 <script>
 let chartInstance = null;
 
