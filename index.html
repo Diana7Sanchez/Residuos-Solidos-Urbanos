@@ -331,85 +331,155 @@
             }
         }
 
-        @media(max-width: 900px) {
-            /* Convertimos el contenedor en Flexbox vertical para controlar el orden de los hijos directos */
-            .container {
-                display: flex;
-                flex-direction: column;
-            }
+       @media(max-width: 900px) {
 
-            /* Convertimos la sidebar en Flexbox vertical para separar el Logo de los Inputs */
-            .sidebar {
-                display: flex;
-                flex-direction: column;
-                border-right: none;
-                padding: 10px 15px;
-                order: 1; /* La sidebar completa se procesa primero */
-            }
+    body {
 
-            /* 1. EL LOGO SE QUEDA ARRIBA */
-            .logo-container {
-                order: 1; 
-                width: 100%;
-                padding: 10px 0;
-                margin-bottom: 10px;
-            }
+        background: white;
+    }
 
-            .sidebar-logo {
-                max-width: 160px;
-                margin-bottom: 0;
-            }
+    /* CONTENEDOR GENERAL */
 
-            /* 3. LOS DATOS / INPUTS PASAN AL FINAL */
-            .sidebar-inputs {
-                order: 3; 
-                border-top: 1px solid #eee;
-                padding-top: 10px;
-            }
+    .container {
 
-            /* 2. LO ROJO (MAIN CONTENT) PASA AL CENTRO, DEBAJO DEL LOGO */
-            .main-content {
-                order: 2; 
-                padding: 15px;
-                gap: 15px;
-            }
+        display: flex;
 
-            .topbar-content {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
+        flex-direction: column;
+    }
 
-            .header-wrapper {
-                align-items: center;
-            }
+    /* SIDEBAR SE DESCOMPONE */
 
-            .subsecretaria-main,
-            .direccion-main,
-            .platform-main {
-                width: 100%;
-                text-align: center;
-            }
+    .sidebar {
 
-            .municipio-box {
-                justify-content: center;
-            }
+        display: contents;
+    }
 
-            .kpi-container {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            }
-        }
+    /* 1. LOGO */
 
-        @media(max-width: 600px) {
-            .main-content { padding: 12px; }
-            .topbar { padding: 18px; }
-            .subsecretaria-main { font-size: 16px; } 
-            .platform-main { font-size: 15px; }
-            .kpi-container { grid-template-columns: 1fr; }
-            .chart-container { height: 300px; }
-            .card { padding: 14px; }
-            .row-inputs { grid-template-columns: 1fr; }
-        }
+    .logo-container {
+
+        order: 1;
+
+        width: 100%;
+
+        padding: 16px 0 10px 0;
+
+        margin: 0;
+
+        border-bottom: none;
+
+        background: white;
+    }
+
+    .sidebar-logo {
+
+        width: 90px;
+
+        max-width: 90px;
+
+        margin: 0 auto;
+
+        display: block;
+    }
+
+    /* 2. HEADER ROJO */
+
+    .main-content {
+
+        order: 2;
+
+        width: 100%;
+
+        padding: 0 14px 14px 14px;
+    }
+
+    .topbar {
+
+        border-radius: 0 0 18px 18px;
+
+        margin-top: 0;
+    }
+
+    .topbar-content {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .header-wrapper {
+
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .subsecretaria-main {
+
+        font-size: 18px;
+    }
+
+    .direccion-main {
+
+        font-size: 13px;
+    }
+
+    .platform-main {
+
+        font-size: 15px;
+    }
+
+    .municipio-box {
+
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    /* 3. INPUTS */
+
+    .sidebar-inputs {
+
+        order: 3;
+
+        width: 100%;
+
+        padding: 14px;
+
+        background: white;
+    }
+
+    /* KPI */
+
+    .kpi-container {
+
+        grid-template-columns: 1fr;
+    }
+
+    /* DASHBOARD */
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+
+        height: 320px;
+    }
+
+    .row-inputs {
+
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+
+        padding: 14px;
+    }
+}
     </style>
 </head>
 
