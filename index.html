@@ -14,7 +14,7 @@
         --panel-bg: #ffffff;
         --primary-color: #611232;
         --secondary-color: #A57F2C;
-        --accent-green: #2E7D32;
+        --accent-green: #002f2a;
         --accent-red: #C62828;
         --accent-blue: #1565C0;
         --text-dark: #222222;
@@ -193,7 +193,7 @@
     }
 
     /* =========================
-       HEADER ROJO
+       HEADER VINO
     ========================== */
 
     .topbar {
@@ -275,6 +275,37 @@
 
         letter-spacing: 0.2px;
     }
+    .help-text {
+
+    display: block;
+
+    margin-top: 4px;
+
+    margin-bottom: 6px;
+
+    color: #666;
+
+    font-size: 11px;
+
+    line-height: 1.35;
+}
+
+.row-labels {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
+
+    color: #777;
+
+    font-weight: 600;
+}
 
     .municipio-box {
 
@@ -305,6 +336,19 @@
 
         color: #FFE082;
     }
+    .source-link {
+
+    color: #611232;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.source-link:hover {
+
+    text-decoration: underline;
+}
 
     /* =========================
        KPI
@@ -754,158 +798,244 @@
 
         </div>
 
-        <!-- INPUTS -->
-        <div class="sidebar-inputs">
+<!-- INPUTS -->
 
-            <div class="section-title">
-                1. Datos del Municipio
-            </div>
+<div class="sidebar-inputs">
 
-            <div class="form-group">
-                <label>Estado</label>
-                <input type="text" id="estado" value="Puebla">
-            </div>
+<div class="section-title">
+    1. Información General del Proyecto
+</div>
 
-            <div class="form-group">
-                <label>Municipio</label>
-                <input type="text" id="municipio" value="Puebla Centro">
-            </div>
+<div class="form-group">
+    <label>Estado</label>
+    <input type="text" id="estado" value="Puebla">
+</div>
 
-            <div class="form-group">
-                <label>Inversión Inicial ($)</label>
-                <input type="text" inputmode="decimal" id="inversion" value="600000000">
-            </div>
+<div class="form-group">
+    <label>Municipio</label>
+    <input type="text" id="municipio" value="Puebla Centro">
+</div>
 
-            <div class="form-group">
-                <label>Días Operación / Año</label>
-                <input type="number" id="dias_operacion" value="360">
-            </div>
+<div class="form-group">
+    <label>Inversión Inicial del Proyecto (MXN)</label>
+    <small class="help-text">
+        Monto total requerido para la construcción e implementación de la planta.
+    </small>
+    <input
+        type="text"
+        inputmode="decimal"
+        id="inversion"
+        value="600000000"
+        placeholder="Ej. 600,000,000">
+</div>
 
-            <div class="section-title">
-                2. Matriz de Ingresos
-            </div>
+<div class="form-group">
+    <label>Días de Operación por Año</label>
+    <small class="help-text">
+        Número de días efectivos de operación anual.
+    </small>
+    <input
+        type="number"
+        id="dias_operacion"
+        value="360">
+</div>
 
-            <div class="form-group">
-                <label>Ingreso por Recepción</label>
+<div class="section-title">
+    2. Fuentes de Ingreso
+</div>
 
-                <div class="row-inputs">
+<div class="form-group">
 
-                    <input type="text" inputmode="decimal" id="ton_recepcion" value="754.4" placeholder="Ton">
+    <label>Recepción de Residuos</label>
 
-                    <input type="text" inputmode="decimal" id="p_recepcion" value="200" placeholder="$">
+    <small class="help-text">
+        Toneladas recibidas por día y tarifa cobrada por tonelada.
+    </small>
 
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Combustible Derivado</label>
-
-                <div class="row-inputs">
-
-                    <input type="text" inputmode="decimal" id="ton_combustible" value="225" placeholder="Ton">
-
-                    <input type="text" inputmode="decimal" id="p_combustible" value="240.32" placeholder="$">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Plástico Flexible</label>
-
-                <div class="row-inputs">
-
-                    <input type="text" inputmode="decimal" id="ton_p_flexible" value="6" placeholder="Ton">
-
-                    <input type="text" inputmode="decimal" id="p_p_flexible" value="1210.23" placeholder="$">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Plástico Difícil</label>
-
-                <div class="row-inputs">
-
-                    <input type="text" inputmode="decimal" id="ton_p_dificil" value="6" placeholder="Ton">
-
-                    <input type="text" inputmode="decimal" id="p_p_dificil" value="1920.8" placeholder="$">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Inorgánico no Valorizable</label>
-
-                <div class="row-inputs">
-
-                    <input type="text" inputmode="decimal" id="ton_inorganico" value="215.7" placeholder="Ton">
-
-                    <input type="text" inputmode="decimal" id="p_inorganico" value="358.57" placeholder="$">
-
-                </div>
-            </div>
-
-            <div class="section-title">
-                3. Matriz de Egresos
-            </div>
-
-            <div class="form-group">
-                <label>Orgánicos (Ton / Precio)</label>
-
-                <div class="row-inputs">
-
-                    <input type="text" inputmode="decimal" id="ton_organicos" value="301.7" placeholder="Ton">
-
-                    <input type="text" inputmode="decimal" id="p_organicos" value="240.14" placeholder="$">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Mano de Obra Anual ($)</label>
-
-                <input type="text" inputmode="decimal" id="g_mano_obra" value="28015836">
-            </div>
-
-            <div class="form-group">
-                <label>Energía Eléctrica Anual ($)</label>
-
-                <input type="text" inputmode="decimal" id="g_energia" value="6791496">
-            </div>
-
-            <div class="form-group">
-                <label>Urbanización Año 0 ($)</label>
-
-                <input type="text" inputmode="decimal" id="g_urbanizacion" value="50000000">
-            </div>
-
-            <div class="section-title">
-                4. Variables Exógenas
-            </div>
-
-            <div class="form-group">
-                <label>Inflación Anual (%)</label>
-
-                <input type="number" id="v_inflacion" value="4.5" step="0.1">
-            </div>
-
-            <div class="form-group">
-                <label>Tasa de Descuento (%)</label>
-
-                <input type="number" id="v_descuento" value="10.0" step="0.1">
-            </div>
-
-            <div class="form-group">
-                <label>Retorno a Municipios (%)</label>
-
-                <input type="number" id="p_compensacion" value="0.5" step="0.1">
-            </div>
-
-        </div>
-
+    <div class="row-labels">
+        <span>Toneladas/día</span>
+        <span>$ por tonelada</span>
     </div>
 
-    <!-- MAIN -->
+    <div class="row-inputs">
+        <input type="text" inputmode="decimal" id="ton_recepcion" value="754.4">
+        <input type="text" inputmode="decimal" id="p_recepcion" value="200">
+    </div>
+
+</div>
+
+<div class="form-group">
+
+    <label>Combustible Derivado de Residuos (CDR)</label>
+
+    <small class="help-text">
+        Producción diaria y precio de comercialización.
+    </small>
+
+    <div class="row-labels">
+        <span>Toneladas/día</span>
+        <span>$ por tonelada</span>
+    </div>
+
+    <div class="row-inputs">
+        <input type="text" inputmode="decimal" id="ton_combustible" value="225">
+        <input type="text" inputmode="decimal" id="p_combustible" value="240.32">
+    </div>
+
+</div>
+
+<div class="form-group">
+
+    <label>Plástico Flexible Recuperado</label>
+
+    <small class="help-text">
+        Producción recuperada y valor de venta.
+    </small>
+
+    <div class="row-labels">
+        <span>Toneladas/día</span>
+        <span>$ por tonelada</span>
+    </div>
+
+    <div class="row-inputs">
+        <input type="text" inputmode="decimal" id="ton_p_flexible" value="6">
+        <input type="text" inputmode="decimal" id="p_p_flexible" value="1210.23">
+    </div>
+
+</div>
+
+<div class="form-group">
+
+    <label>Plástico Rígido Recuperado</label>
+
+    <small class="help-text">
+        Producción recuperada y valor de venta.
+    </small>
+
+    <div class="row-labels">
+        <span>Toneladas/día</span>
+        <span>$ por tonelada</span>
+    </div>
+
+    <div class="row-inputs">
+        <input type="text" inputmode="decimal" id="ton_p_dificil" value="6">
+        <input type="text" inputmode="decimal" id="p_p_dificil" value="1920.8">
+    </div>
+
+</div>
+
+<div class="form-group">
+
+    <label>Inorgánicos No Valorizables</label>
+
+    <small class="help-text">
+        Material comercializado para disposición o aprovechamiento secundario.
+    </small>
+
+    <div class="row-labels">
+        <span>Toneladas/día</span>
+        <span>$ por tonelada</span>
+    </div>
+
+    <div class="row-inputs">
+        <input type="text" inputmode="decimal" id="ton_inorganico" value="215.7">
+        <input type="text" inputmode="decimal" id="p_inorganico" value="358.57">
+    </div>
+
+</div>
+
+<div class="section-title">
+    3. Costos Operativos
+</div>
+
+<div class="form-group">
+
+    <label>Disposición de Orgánicos</label>
+
+    <small class="help-text">
+        Volumen gestionado diariamente y costo unitario de tratamiento.
+    </small>
+
+    <div class="row-labels">
+        <span>Toneladas/día</span>
+        <span>$ por tonelada</span>
+    </div>
+
+    <div class="row-inputs">
+        <input type="text" inputmode="decimal" id="ton_organicos" value="301.7">
+        <input type="text" inputmode="decimal" id="p_organicos" value="240.14">
+    </div>
+
+</div>
+
+<div class="form-group">
+    <label>Mano de Obra (MXN por año)</label>
+    <small class="help-text">
+        Sueldos, prestaciones y cargas laborales.
+    </small>
+    <input type="text" inputmode="decimal" id="g_mano_obra" value="28015836">
+</div>
+
+<div class="form-group">
+    <label>Energía Eléctrica (MXN por año)</label>
+    <small class="help-text">
+        Consumo eléctrico anual estimado.
+    </small>
+    <input type="text" inputmode="decimal" id="g_energia" value="6791496">
+</div>
+
+<div class="form-group">
+    <label>Urbanización y Obras Exteriores (MXN)</label>
+    <small class="help-text">
+        Inversión inicial asociada a infraestructura complementaria.
+    </small>
+    <input type="text" inputmode="decimal" id="g_urbanizacion" value="50000000">
+</div>
+
+
+<div class="section-title">
+    4. Parámetros Financieros
+</div>
+
+<div class="form-group">
+    <label>Inflación Anual (%)</label>
+
+    <small class="help-text">
+        Último valor reportado por
+        <a
+            href="https://www.banxico.org.mx/tipcamb/llenarInflacionAction.do?idioma=sp"
+            target="_blank"
+            class="source-link">
+            BANXICO
+        </a>
+    </small>
+
+    <input
+        type="number"
+        id="v_inflacion"
+        value="4.5"
+        step="0.1">
+</div>
+
+<div class="form-group">
+    <label>Tasa de Descuento (%)</label>
+    <small class="help-text">
+        Rendimiento mínimo esperado del proyecto.
+    </small>
+    <input type="number" id="v_descuento" value="10.0" step="0.1">
+</div>
+
+<div class="form-group">
+    <label>Compensación Municipal (%)</label>
+    <small class="help-text">
+        Porcentaje de los ingresos destinado al municipio por la gestión de residuos.
+    </small>
+    <input type="number" id="p_compensacion" value="0.5" step="0.1">
+</div>
+
+</div>
+
+</div>
     <div class="main-content">
 
         <!-- HEADER -->
@@ -1060,7 +1190,7 @@ let chartInstance = null;
 function cleanNumericValue(id) {
     const el = document.getElementById(id);
     if (!el) return 0;
-    // Eliminamos comas antes de parsear para no romper cálculos financieros
+    // Eliminar comas antes de parsear para no romper los cálculos financieros
     return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
@@ -1311,7 +1441,7 @@ function calcularTIR(flujos, estimacion = 0.1) {
     return (r > -1 && r < 5) ? r : null;
 }
 
-// Escucha de cambios automática
+// cambios automáticos
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', calcular);
     input.addEventListener('change', calcular);
@@ -1329,7 +1459,7 @@ function formatearInputMiles(input) {
     });
 }
 
-// Aplicar formato exclusivo a campos de texto que actúan como decimales dinámicos
+// formato exclusivo a campos de texto que actúan como decimales dinámicos
 document.querySelectorAll('input[inputmode="decimal"]').forEach(input => {
     if(input.value !== '') {
         let valor = input.value.replace(/,/g, '');
